@@ -2,7 +2,6 @@ long long finDecimalLen(long long n){
     long long a = 10 ; 
     while (n / a != 0 ){
         a = a*10 ; 
-
     }
     return a/10  ;
 }    
