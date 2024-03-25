@@ -1,3 +1,4 @@
+
 int lengthOfLongestSubstring(char* s) {
     int len = strlen(s) ;
     if (len == 1) return 1 ; 
