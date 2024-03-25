@@ -1,3 +1,4 @@
+
 char* longestPalindrome(char* s) {
     int max = 1 ; 
     int len = strlen(s) ; 
