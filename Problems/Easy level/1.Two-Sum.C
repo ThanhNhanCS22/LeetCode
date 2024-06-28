@@ -1,4 +1,4 @@
-#O(n^2) approach 
+//O(n^2) approach 
 // int* twoSum(int* nums, int numsSize, int target,  int* returnSize ){
     
 
@@ -25,7 +25,7 @@
 
 // }
 
-#O(n) approach 
+//O(n) approach 
 
 typedef struct HashNode {
     int diff;
