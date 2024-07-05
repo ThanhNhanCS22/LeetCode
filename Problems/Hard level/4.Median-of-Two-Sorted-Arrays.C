@@ -28,7 +28,7 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
 
 }
 
-/* //I know my solution is a bull of shit because it is O(m+n), 
+/* //I know my solution is a bullshit because it is O(m+n), 
 //however LC accepted it and 
 //I also lernt a new method of O(log(m+n))
 
