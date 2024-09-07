@@ -1,92 +1,66 @@
-bool isValid(char* s) {
-    int length = strlen(s);
-  
-    int temp = 0 ;
-    if (length % 2 == 1 || length <2  ) { 
-        return 0 ; 
+struct stack{
+    int size ;
+    int top; 
+    char *arr ; 
+};
+
+bool isEmpty(struct stack* ptr ){
+    if (ptr->top == -1 ) {
+        return 1; 
     }
-    for(int i = 0; i < length   ; i++  ) {
+    return 0; 
+    
+} 
+bool isFull(struct stack* ptr ){
+    if (ptr-> top == ptr->size -1 ) {
+        return 1; 
+    }
+    return 0; 
+    
+} 
+void push(struct stack * ptr, char val) {
+    if(isFull(ptr)){
+        printf("Stack is Overflow!!!\n") ; 
+    }
+    else  ptr->arr[++(ptr->top)] = val ;
+    
+}
+char pop (struct stack* ptr){
+    
+    if (isEmpty(ptr) ) {
+        printf("Stack is Underflow!!!\n") ; 
+        return -1 ; 
         
-        if (s[i] == '(' || s[i] == '{' || s[i] == '['){
-      
-            continue ; 
-        }
-        else {   
-            if(s[i] == ')'){
-                int check_re =  0 ; 
-                
-                int check = 1 ;  
-                for(int j = i -1 ; j >= 0 ; j --){
-                    if(s[j] == ']' || s[j] == ')' || s[j] == '}'){
-                                
-                        check = check + 2  ;            
-                    }
-                    else if (s[j] == '(' && i - check == j ){
-                       
-                        temp = temp+ 2; 
-                      
-                        check_re = 1 ; 
-                        break; 
-                    }
-                    
-                }
-                if (check_re == 0){
-                    return 0 ; 
-            
-                }    
-            }
-            
-            else if(s[i] == ']'){
-                int check_re =  0 ; 
-              
-                int check = 1 ;  
-                for(int j = i -1 ; j >= 0 ; j --){
-                    if(s[j] == ']' || s[j] == ')' || s[j] == '}'){
-                                       
-                        check = check + 2 ;       
-                    }
-                    else if (s[j] == '[' && i - check == j ){              
-                        temp = temp+ 2; 
-                        check_re = 1 ; 
-                        break; 
-                    }
-                    
-                }
-                if (check_re == 0){
-                    return 0 ; 
-            
-                }    
-            }
-            else if(s[i] == '}'){
-                int check_re =  0 ; 
-            
-                int check = 1 ;  
-                for(int j = i -1 ; j >= 0 ; j --){
-                    if(s[j] == ']' || s[j] == ')' || s[j] == '}'){
-                         
-                        check =  check + 2 ;          
-                    }
-                    else if (s[j] == '{' && i - check == j ){          
-                        temp = temp + 2;               
-                        check_re = 1 ; 
-                        break; 
-                    }
-                    
-                }
-                if (check_re == 0){
-                    return 0 ; 
-            
-                }    
-            }            
-        }
     }
-    
-
-
-    if(temp == length) {
-        return  1 ; 
+    else { 
+        return ptr->arr[ptr->top--];  
     }
-    return 0 ; 
+}
+char peek(struct stack* ptr){
+    if (ptr->top == -1 ){ 
     
+        printf("Stack is underflow!!!\n") ; 
+        return -1 ; 
+    }
+    else return ptr->arr[ptr->top]; 
+} 
+bool isValid(char *s) {
+    int len = strlen(s)  ; 
+    struct stack *parentheseStack = malloc(sizeof(struct stack)) ;
+    parentheseStack->size = len ;
+    parentheseStack->top = -1;
+    parentheseStack->arr = malloc((len) *sizeof(char)) ;
+    for(int i = 0 ;  i < len  ; i++) {
 
+        if(s[i] == '{' || s[i] == '[' || s[i] == '(') {
+            push(parentheseStack,s[i]);  
+        }
+        else{
+            if(parentheseStack->top == -1 ) return 0  ;
+            else if(s[i] == '}' && pop(parentheseStack) != '{'  )  return 0; 
+            else if(s[i] == ']' && pop(parentheseStack) != '['   )  return 0; 
+            else if(s[i] == ')' && pop(parentheseStack) != '('  )  return 0; 
+        }  
+    } 
+    return parentheseStack->top == -1? 1 : 0  ; 
 }
